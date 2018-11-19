@@ -7,19 +7,15 @@ const { PORT } = require('./config');
 const app = express();
 console.log('Hello Noteful!');
 
-// INSERT EXPRESS APP CODE HERE...
-
-
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static('public'));
-
-
 app.use('/api/notes', notesRouter);
 
 //404 handling middleware - gets here after it tries to get to the other endpoints
 app.use(function (req, res, next) { var err = new Error('Not Found');
-  err.status = 404; res.status(404).json({ message: 'Not Found' });
+  err.status = 404;
+  res.status(404).json({ message: 'Not Found' });
   //this sets the status to 404, and makes the .json response the error message
 });
 
